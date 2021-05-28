@@ -148,6 +148,39 @@ qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage \
   -append "console=ttyS0"
 ````
 
+----------------to run you custome codes ---------------------
+$ cd /home/aj/Desktop/small_setup/l4bw/initramfs/etc < where ever your initramsfs dir >
+$ mkdir apps
+$ gedit hello.c 
+-----
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+	printf("mini_linux says: Hello world!\n");
+	return 0;
+}
+-----
+$ gcc -g -Wall -g -o hello.out  hello.c -static
+$ cd ../..
+$ find . -print0 | cpio --null -ov --format=newc \
+  | gzip -9 > $BUILDS/initramfs.cpio.gz
+  ---> check your etc/apps is loaded or not
+$ qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage   -initrd $BUILDS/initramfs.cpio.gz -nographic   -append "console=ttyS0"
+inside minibox --
+/ # ls
+bin      etc      linuxrc  root     sys
+dev      init     proc     sbin     usr
+/ # cd etc
+/etc # ls
+apps
+/etc # cd apps 
+/etc/apps # ls
+hello.c    hello.out
+/etc/apps # ./hello.out
+mini_linux says: Hello world! < CTRL+a x>
+/etc/apps # QEMU: Terminated
+
+
 Note: for better performance, add the `-enable-kvm` option if your host has KVM enabled:
 ````
 qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage \
