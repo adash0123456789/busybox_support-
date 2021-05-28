@@ -21,7 +21,7 @@ mkdir -p $LINUX_BUILD
 cd $LINUX
 make O=$LINUX_BUILD allnoconfig
 cd $LINUX_BUILD
-[ in new system may be we need to compile the kernel for that 'cp -v /boot/config-$(uname -r) .config' ] 
+[ in new system may be we need to compile the kernel for that 'cp -v /boot/config-$(uname -r)' .config' since we want the busybox to take this    kernel... in the example system  l4bw (which is in adash0123456789 google-drive) we havel4bw/linux-4.10.6, so copy the 'cp -v /boot/config-$(uname -r)' and do the changes.. as belwo before make] 
 make menuconfig
 ````
 
