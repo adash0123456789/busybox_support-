@@ -533,8 +533,8 @@ https://github.com/cirosantilli/linux-kernel-module-cheat
 
 cd < to some location , where you want to have your BB build>
 sudo cp -rf linux_4x_BusyBox  linux_4x_BusyBox_<fresh one ... >
-cd /home/ajay/linux_4x_BusyBox_working 
-export OPT=/home/ajay/linux_4x_BusyBox_working  
+cd /home/ajay/linux_4x_BusyBox_working
+export OPT=/home/ajay/linux_4x_BusyBox_working  OR still better "export OPT=`pwd`
 export BUILDS=$OPT/mini_linux
 export LINUX=$OPT/linux
 export LINUX_BUILD=$BUILDS/linux
@@ -582,6 +582,7 @@ qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage \
 
 cntrl+a x < to terminate the session>
 
+foo.tgz --> in this repo is compressed for the above working !!
 
 
 
