@@ -584,8 +584,8 @@ cntrl+a x < to terminate the session>
 
 foo.tgz --> in this repo is compressed for the above working !!
 
-
-
+--- zip with multiple symlinks --- 
+zip --symlinks -r foo.zip foo/
 
 
 
