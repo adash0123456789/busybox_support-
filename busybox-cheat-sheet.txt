@@ -7,8 +7,8 @@ https://gist.github.com/chrisdone/02e165a0004be33734ac2334f215380e
 ## Common
 
 ````
-export OPT=/opt
-export BUILDS=/some/where/mini_linux
+export OPT=/opt     < export OPT=`pwd` >
+export BUILDS=/some/where/mini_linux <  export BUILDS=$OPT/mini_linux >
 mkdir -p $BUILDS
 ````
 
@@ -149,8 +149,8 @@ qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage \
 ````
 
 ----------------to run you custome codes ---------------------
-$ cd /home/aj/Desktop/small_setup/l4bw/initramfs/etc < where ever your initramsfs dir >
-$ mkdir apps
+$ mkdir /home/aj/Desktop/small_setup/l4bw/
+$ cd /home/aj/Desktop/small_setup/l4bw/hello 
 $ gedit hello.c 
 -----
 #include <stdio.h>
@@ -161,10 +161,12 @@ int main(int argc, char **argv) {
 }
 -----
 $ gcc -g -Wall -g -o hello.out  hello.c -static
-$ cd ../..
+$ cd ..
+$ cd initramfs/etc
+$ cp -rf ../../hello .
 $ find . -print0 | cpio --null -ov --format=newc \
   | gzip -9 > $BUILDS/initramfs.cpio.gz
-  ---> check your etc/apps is loaded or not
+  ---> check your etc/hello is loaded or not
 $ qemu-system-x86_64 -kernel $LINUX_BUILD/arch/x86_64/boot/bzImage   -initrd $BUILDS/initramfs.cpio.gz -nographic   -append "console=ttyS0"
 inside minibox --
 / # ls
@@ -172,13 +174,13 @@ bin      etc      linuxrc  root     sys
 dev      init     proc     sbin     usr
 / # cd etc
 /etc # ls
-apps
-/etc # cd apps 
-/etc/apps # ls
+hello
+/etc # cd hello 
+/etc/hello # ls
 hello.c    hello.out
-/etc/apps # ./hello.out
+/etc/hello # ./hello.out
 mini_linux says: Hello world! < CTRL+a x>
-/etc/apps # QEMU: Terminated
+/etc/hello # QEMU: Terminated
 
 
 Note: for better performance, add the `-enable-kvm` option if your host has KVM enabled:
