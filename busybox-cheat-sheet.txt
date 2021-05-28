@@ -21,6 +21,7 @@ mkdir -p $LINUX_BUILD
 cd $LINUX
 make O=$LINUX_BUILD allnoconfig
 cd $LINUX_BUILD
+[ in new system may be we need to compile the kernel for that 'cp -v /boot/config-$(uname -r) .config' ] 
 make menuconfig
 ````
 
