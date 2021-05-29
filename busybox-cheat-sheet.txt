@@ -40,7 +40,7 @@ Device Drivers ---> Character devices ---> Serial drivers ---> Console on 8250/1
 File systems ---> Pseudo filesystems ---> /proc file system support ---> yes
 File systems ---> Pseudo filesystems ---> sysfs file system support ---> yes
 ````
-
+[ You may need to copy the .confg from $LINUX_BUILD to $LINUX --> and can do make menuconfig @ $LINUX and make, in order to have the device driver programming]
 Build the kernel:
 
 ````
